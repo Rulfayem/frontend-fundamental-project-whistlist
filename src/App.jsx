@@ -2,20 +2,21 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import ErrorPage from "./website_pages/ErrorPage";
-import Home from "./website_pages/HomePage";
-import AddTodo from "./website_pages/AddWishlistedGame";
+import HomePage from "./website_pages/HomePage";
 import useLocalStorage from "use-local-storage";
-import { TodoContext } from "./contexts/WishlistedContext";
-import EditTodo from "./website_pages/EditWishlistedGamesDescription";
+import { WishlistedContext } from "./contexts/WishlistedContext";
+import EditGameDesc from "./website_pages/EditWishlistedGamesDescription";
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import AddWishlistedGame from "./website_pages/AddWishlistedGame";
 
-function Layout() {
+function SiteLayout() {
   return (
     <>
-      <Navbar bg="light" varient="light">
+      <Navbar bg="light" variant="light">
         <Container>
-          <Navbar.Brand href="/">Todos</Navbar.Brand>
+          <Navbar.Brand href="/">Wishlisted Games</Navbar.Brand>
           <Nav>
-            <Nav.Link href="/add">Add Todo</Nav.Link>
+            <Nav.Link href="/add">Add Game</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
@@ -25,19 +26,19 @@ function Layout() {
 }
 
 export default function App() {
-  const [todos, setTodos] = useLocalStorage("todos", []);
+  const [wishedGame, setWishedGame] = useLocalStorage("wishlisted game", []);
   return (
-    <TodoContext.Provider value={{ todos, setTodos }}>
+    <WishlistedContext.Provider value={{ wishedGame, setWishedGame }}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="add" element={<AddTodo />} />
-            <Route path="*" element={<Error page />} />
-            <Route path="todo/:id" element={<EditTodo />} />
+          <Route path="/" element={<SiteLayout />}>
+            <Route index element={<HomePage />} />
+            <Route path="add" element={<AddWishlistedGame />} />
+            <Route path="*" element={<ErrorPage />} />
+            <Route path="game/:id" element={<EditGameDesc />} />
           </Route>
         </Routes>
       </BrowserRouter>
-    </TodoContext.Provider>
+    </WishlistedContext.Provider>
   );
 }

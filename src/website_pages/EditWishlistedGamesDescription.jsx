@@ -2,61 +2,74 @@ import { useContext, useState } from "react";
 import { Button } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
-import { TodoContext } from "../contexts/WishlistedContext";
+import { WishlistedContext } from "../contexts/WishlistedContext";
 import { useNavigate, useParams } from "react-router-dom";
 
-export default function EditTodo() {
-    const setTodos = useContext(TodoContext).setTodos;
-    const todos = useContext(TodoContext).todos;
+export default function EditGameDesc() {
+    const { wishedGame, setWishedGame } = useContext(WishlistedContext);
     const navigate = useNavigate();
-    const id = parseInt(useParams().id);
-    const currentTodo = todos.filter((todo) => todo.id === id)[0];
-    const [title, setTitle] = useState(currentTodo.title);
-    const [description, setDescription] = useState(currentTodo.description);
-    const [completed, setCompleted] = useState(currentTodo.completed);
 
-    function updateTodo(event) {
+    const { id } = useParams();
+    const gameId = parseInt(id);
+    const currentGame = wishedGame.find((game) => game.id === gameId);
+
+    const [gameTitle, setGameTitle] = useState(currentGame?.gameTitle || "");
+    const [gameDescription, setGameDescription] = useState(currentGame?.description || "");
+    const [released, setReleased] = useState(currentGame?.released || false);
+
+    //incase game is not found
+    if (!currentGame) {
+        return (
+            <Container className="my-3">
+                <h1>Game not found</h1>
+                <p>The requested game does not exist.</p>
+            </Container>
+        );
+    }
+
+
+    function updateGame(event) {
         event.preventDefault();
-        const updatedTodos = todos.map((todo) => {
-            if (todo.id === id) {
-                return { id, title, description, completed };
+        const updatedGames = wishedGame.map((game) => {
+            if (game.id === gameId) {
+                return { id: gameId, gameTitle, gameDescription, released };
             }
-            return todo;
+            return game;
         });
-        setTodos(updatedTodos);
+        setWishedGame(updatedGames);
         navigate('/');
     }
     return (
         <Container>
-            <h1 className="my-3">Add Todo</h1>
-            <Form onSubmit={updateTodo}>
-                <Form.Group className="mb-3" controlId="title">
-                    <Form.Label>Title</Form.Label>
+            <h1 className="my-3">Edit Description</h1>
+            <Form onSubmit={updateGame}>
+                <Form.Group className="mb-3" controlId="gameTitle">
+                    <Form.Label>Game Title</Form.Label>
                     <Form.Control
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
+                        value={gameTitle}
+                        onChange={(e) => setGameTitle(e.target.value)}
                         type="text"
-                        placeholder="Get software developer job"
+                        placeholder="Hollow Knight: Silksong"
                         required
                     />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="description">
                     <Form.Label>Description</Form.Label>
                     <Form.Control
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
+                        value={gameDescription}
+                        onChange={(e) => setGameDescription(e.target.value)}
                         as="textarea"
                         rows={3}
-                        placeholder={`1. Create amazing project\n2. Apply to Google and Netflix\n3. Crush interview`}
+                        placeholder={`1. Metroidvania\n2. Platformer\n3. Difficult`}
                         required
                     />
                 </Form.Group>
                 <Form.Check
                     type="checkbox"
-                    id="completed"
-                    label="Mark as completed"
-                    checked={completed}
-                    onChange={(e) => setCompleted(e.target.checked)}
+                    id="released"
+                    label="Mark as released"
+                    checked={released}
+                    onChange={(e) => setReleased(e.target.checked)}
                     className="mb-3"
                 />
                 <Button variant="primary" type="submit">

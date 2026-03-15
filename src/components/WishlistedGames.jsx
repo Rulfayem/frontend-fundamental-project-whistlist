@@ -1,14 +1,14 @@
 import { Card, Button } from "react-bootstrap";
 import { useEffect, useState, useContext } from "react";
-import { TodoContext } from "../contexts/WishlistedContext";
+import { WishlistedContext } from "../contexts/WishlistedContext";
 
 
-export default function TodoCard({ todo }) {
-    const completed = todo.completed;
-    const border = completed ? "success" : "danger";
+export default function WishlistedGameDisplay({ game }) {
+    const owned = game.owned;
+    const border = owned ? "success" : "danger";
     const [timer, setTimer] = useState(0);
     const [timerInterval, setTimerInterval] = useState(null);
-    const setTodos = useContext(TodoContext).setTodos;
+    const { setWishedGame } = useContext(WishlistedContext);
 
     //Function related to the timers
     const startTimer = () => {
@@ -31,9 +31,9 @@ export default function TodoCard({ todo }) {
         setTimer(0);
     }
 
-    const deleteTodo = () => {
-        setTodos((prevTodos) =>
-            prevTodos.filter((prevTodo) => prevTodo.id !== todo.id)
+    const deleteGame = () => {
+        setWishedGame((prevGames) =>
+            prevGames.filter((prevGame) => prevGame.id !== game.id)
         );
     }
 
@@ -45,10 +45,10 @@ export default function TodoCard({ todo }) {
     return (
         <>
             <Card border={border} className="my-3">
-                <Card.Header>{!completed && "Not"} Completed</Card.Header>
+                <Card.Header>{owned ? "Owned" : "Not Owned"}</Card.Header>
                 <Card.Body>
-                    <Card.Title>{todo.title}</Card.Title>
-                    <Card.Text>{todo.description}</Card.Text>
+                    <Card.Title>{game.gameTitle}</Card.Title>
+                    <Card.Text>{game.gameDescription}</Card.Text>
                     <p>Timer: {timer} seconds</p>
                     <Button onClick={startTimer}>
                         <i className="bi bi-play"></i>
@@ -59,10 +59,10 @@ export default function TodoCard({ todo }) {
                     <Button onClick={resetTimer} className="ms-2">
                         <i className="bi bi-arrow-clockwise"></i>
                     </Button>
-                    <Button variant="secondary" href={`todos/${todo.id}`} className="ms-2">
+                    <Button variant="secondary" href={`game/${game.id}`} className="ms-2">
                         <i className="bi bi-pencil"></i>
                     </Button>
-                    <Button variant="danger" onClick={deleteTodo} className="ms-2">
+                    <Button variant="danger" onClick={deleteGame} className="ms-2">
                         <i className="bi bi-trash3"></i>
                     </Button>
                 </Card.Body>

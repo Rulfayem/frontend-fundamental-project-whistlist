@@ -19,7 +19,7 @@ export default function AddWishlistedGameManually() {
                 className="mb-3"
                 onClick={() => navigate("/add-game-from-steam")}
             >
-                Add Game From Steam temporary
+                Add Game From Steam
             </Button>
 
             <Form

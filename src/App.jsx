@@ -7,7 +7,8 @@ import useLocalStorage from "use-local-storage";
 import { WishlistedContext } from "./contexts/WishlistedContext";
 import EditGameDesc from "./website_pages/EditWishlistedGamesDescription";
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import AddWishlistedGame from "./website_pages/AddWishlistedGame";
+import AddWishlistedGameManually from "./website_pages/AddWishlistedGameManually";
+import AddWishlistedGameFromSteam from "./website_pages/AddWishlistedGameFromSteam"
 
 function SiteLayout() {
   return (
@@ -16,7 +17,7 @@ function SiteLayout() {
         <Container>
           <Navbar.Brand href="/">Wishlisted Games</Navbar.Brand>
           <Nav>
-            <Nav.Link href="/add">Add Game</Nav.Link>
+            <Nav.Link href="/add-game-from-steam">Add Game</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
@@ -33,7 +34,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<SiteLayout />}>
             <Route index element={<HomePage />} />
-            <Route path="add" element={<AddWishlistedGame />} />
+            <Route path="add-game-manually" element={<AddWishlistedGameManually />} />
+            <Route path="add-game-from-steam" element={<AddWishlistedGameFromSteam />} />
             <Route path="*" element={<ErrorPage />} />
             <Route path="game/:id" element={<EditGameDesc />} />
           </Route>

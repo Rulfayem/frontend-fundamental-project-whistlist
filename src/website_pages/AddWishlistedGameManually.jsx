@@ -3,7 +3,7 @@ import { Button, Container, Form } from "react-bootstrap";
 import { WishlistedContext } from "../contexts/WishlistedContext";
 import { useNavigate } from "react-router-dom";
 
-export default function AddWishlistedGame() {
+export default function AddWishlistedGameManually() {
     const [gameTitle, setGameTitle] = useState("");
     const [gameDescription, setGameDescription] = useState("");
     const [released, setReleased] = useState(false);
@@ -13,6 +13,15 @@ export default function AddWishlistedGame() {
     return (
         <Container>
             <h1 className="my-3">Add game:</h1>
+
+            <Button
+                variant="secondary"
+                className="mb-3"
+                onClick={() => navigate("/add-game-from-steam")}
+            >
+                Add Game From Steam temporary
+            </Button>
+
             <Form
                 onSubmit={event => {
                     event.preventDefault()

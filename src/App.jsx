@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Nav, Navbar } from "react-bootstrap";
-import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Outlet, Route, Routes, Link } from "react-router-dom";
 import ErrorPage from "./website_pages/ErrorPage";
 import HomePage from "./website_pages/HomePage";
 import useLocalStorage from "use-local-storage";
@@ -9,15 +9,16 @@ import EditGameDesc from "./website_pages/EditWishlistedGamesDescription";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import AddWishlistedGameManually from "./website_pages/AddWishlistedGameManually";
 import AddWishlistedGameFromSteam from "./website_pages/AddWishlistedGameFromSteam"
+import "./App.css"
 
 function SiteLayout() {
   return (
     <>
       <Navbar bg="light" variant="light">
         <Container>
-          <Navbar.Brand href="/">Wishlisted Games</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/">Wishlisted Games</Navbar.Brand>
           <Nav>
-            <Nav.Link href="/add-game-from-steam">Add Game</Nav.Link>
+            <Nav.Link as={Link} to="/add-game-from-steam">Add Game</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
@@ -28,6 +29,7 @@ function SiteLayout() {
 
 export default function App() {
   const [wishedGame, setWishedGame] = useLocalStorage("wishlisted game", []);
+
   return (
     <WishlistedContext.Provider value={{ wishedGame, setWishedGame }}>
       <BrowserRouter>

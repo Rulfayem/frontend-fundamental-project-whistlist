@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
+import { Button, Container, Form, Card } from "react-bootstrap";
 import { WishlistedContext } from "../contexts/WishlistedContext";
 import { useNavigate } from "react-router-dom";
 
@@ -9,56 +9,110 @@ export default function AddWishlistedGameManually() {
     const { wishedGame, setWishedGame } = useContext(WishlistedContext);
     const navigate = useNavigate();
 
+    const isFormValid = gameTitle.trim() !== "" && gameDescription.trim() !== "";
+
     return (
         <Container>
             <h1 className="my-3">Add Game</h1>
 
             <Button
-                variant="secondary"
-                className="mb-3"
                 onClick={() => navigate("/add-game-from-steam")}
+                className="mb-4 w-100"
+                style={{
+                    background: "linear-gradient(90deg, #e74e20, #5702e0)",
+                    border: "none",
+                    color: "#dbe3ec",
+                    fontWeight: "bold",
+                    padding: "10px",
+                    fontSize: "1rem",
+                    boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
+                    cursor: "pointer",
+                }}
             >
                 Add Game From Steam
             </Button>
 
-            <Form
-                onSubmit={event => {
-                    event.preventDefault();
-                    setWishedGame([
-                        ...wishedGame,
-                        { id: Date.now(), gameTitle, gameDescription },
-                    ]);
-                    navigate("/");
+            <Card
+                className="p-3 no-hover-card cool-custom-card"
+                style={{
+                    backgroundColor: "#2e3347",
+                    borderRadius: "10px",
+                    border: "2px solid #62bcf0",
                 }}
             >
+                <Form
+                    onSubmit={(event) => {
+                        event.preventDefault();
+                        if (!isFormValid) return;
+                        setWishedGame([
+                            ...wishedGame,
+                            { id: Date.now(), gameTitle, gameDescription, owned: false },
+                        ]);
+                        navigate("/");
+                    }}
+                >
+                    <Form.Group className="mb-3" controlId="gameTitle">
+                        <Form.Label
+                            style={{
+                                color: "#dbe3ec",
+                                fontWeight: "bold",
+                                fontSize: "1.05rem",
+                            }}
+                        >
+                            Game Title
+                        </Form.Label>
+                        <Form.Control
+                            value={gameTitle}
+                            onChange={(e) => setGameTitle(e.target.value)}
+                            type="text"
+                            placeholder="Hollow Knight: Silksong"
+                            required
+                            // placeholder color only for this input
+                            className="white-placeholder input-white"
+                        />
+                    </Form.Group>
 
-                <Form.Group className="mb-3" controlId="gameTitle">
-                    <Form.Label>Game Title</Form.Label>
-                    <Form.Control
-                        value={gameTitle}
-                        onChange={(e) => setGameTitle(e.target.value)}
-                        type="text"
-                        placeholder="Hollow Knight: Silksong"
-                        required
-                    />
-                </Form.Group>
+                    <Form.Group className="mb-3" controlId="gameDescription">
+                        <Form.Label
+                            style={{
+                                color: "#dbe3ec",
+                                fontWeight: "bold",
+                                fontSize: "1.05rem",
+                            }}
+                        >
+                            Description
+                        </Form.Label>
+                        <Form.Control
+                            value={gameDescription}
+                            onChange={(e) => setGameDescription(e.target.value)}
+                            as="textarea"
+                            rows={3}
+                            placeholder={`1. Metroidvania\n2. Platformer\n3. Difficult`}
+                            required
+                            className="white-placeholder input-white"
+                        />
+                    </Form.Group>
 
-                <Form.Group className="mb-3" controlId="gameDescription">
-                    <Form.Label>Description</Form.Label>
-                    <Form.Control
-                        value={gameDescription}
-                        onChange={(e) => setGameDescription(e.target.value)}
-                        as="textarea"
-                        rows={3}
-                        placeholder={`1. Metroidvania\n2. Platformer\n3. Difficult`}
-                        required
-                    />
-                </Form.Group>
-
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
-            </Form>
+                    <Button
+                        type="submit"
+                        disabled={!isFormValid}
+                        className="w-100"
+                        style={{
+                            background: isFormValid
+                                ? "linear-gradient(90deg, #4e91dd, #2f73af)"
+                                : "#4a4f63",
+                            border: "none",
+                            fontWeight: "bold",
+                            padding: "10px",
+                            color: "#dbe3ec",
+                            cursor: isFormValid ? "pointer" : "not-allowed",
+                            boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
+                        }}
+                    >
+                        Submit
+                    </Button>
+                </Form>
+            </Card>
         </Container>
     );
 }

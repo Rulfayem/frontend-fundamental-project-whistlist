@@ -26,14 +26,27 @@
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
+/* this for the few custom cards that i dont want to have the hover */
+.no-hover-card:hover {
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* certain placeholder text want to be this specific colour */
+.cool-custom-card input::placeholder,
+.cool-custom-card textarea::placeholder {
+    color: #D3D3D3;
+    opacity: 1;
+}
+
 /* custom navbar styling things */
 .navbar-custom {
-    background-color: #1b2838;
+    background-color: #1a2838;
     padding: 10px;
 }
 
 .navbar-custom .navbar-brand {
-    color: #66c0f4 !important;
+    color: #62bcf0 !important;
     font-weight: bold;
 }
 
@@ -42,14 +55,14 @@
 }
 
 .add-link:hover {
-    color: #66c0f4 !important;
+    color: #65bef1 !important;
 }
 
 
 /* background and title stuff */
 body {
 
-    background: linear-gradient(180deg, #2d2f48 0%, #1b1f33 100%);
+    background: linear-gradient(180deg, #292b42 0%, #181c2e 100%);
 
     /* for the title thing */
     color: #dbe3ec;
@@ -57,4 +70,18 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
+}
+
+/* only affects this specific placeholder text */
+.white-placeholder::placeholder {
+    color: #1f1e1e !important;
+    opacity: 1;
+}
+
+/* all text fields same consistent white colour */
+.input-white {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid #5db9ee !important;
+    caret-color: #000000 !important;
 }

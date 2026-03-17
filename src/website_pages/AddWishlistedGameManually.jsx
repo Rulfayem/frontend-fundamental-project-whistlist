@@ -6,13 +6,12 @@ import { useNavigate } from "react-router-dom";
 export default function AddWishlistedGameManually() {
     const [gameTitle, setGameTitle] = useState("");
     const [gameDescription, setGameDescription] = useState("");
-    const [released, setReleased] = useState(false);
     const { wishedGame, setWishedGame } = useContext(WishlistedContext);
     const navigate = useNavigate();
 
     return (
         <Container>
-            <h1 className="my-3">Add game:</h1>
+            <h1 className="my-3">Add Game</h1>
 
             <Button
                 variant="secondary"
@@ -24,10 +23,10 @@ export default function AddWishlistedGameManually() {
 
             <Form
                 onSubmit={event => {
-                    event.preventDefault()
+                    event.preventDefault();
                     setWishedGame([
                         ...wishedGame,
-                        { id: Date.now(), gameTitle, gameDescription, released },
+                        { id: Date.now(), gameTitle, gameDescription },
                     ]);
                     navigate("/");
                 }}
@@ -43,6 +42,7 @@ export default function AddWishlistedGameManually() {
                         required
                     />
                 </Form.Group>
+
                 <Form.Group className="mb-3" controlId="gameDescription">
                     <Form.Label>Description</Form.Label>
                     <Form.Control
@@ -54,14 +54,7 @@ export default function AddWishlistedGameManually() {
                         required
                     />
                 </Form.Group>
-                <Form.Check
-                    type="checkbox"
-                    id="released"
-                    label="To be released"
-                    checked={released}
-                    onChange={(e) => setReleased(e.target.checked)}
-                    className="mb-3"
-                />
+
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>

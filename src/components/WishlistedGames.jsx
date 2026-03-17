@@ -28,7 +28,11 @@ export default function WishlistedGameDisplay({ game }) {
             <Card.Header>{owned ? "Owned✅" : "Not Owned❌"}</Card.Header>
             <Card.Body>
                 <Card.Title>{game.gameTitle}</Card.Title>
-                <Card.Text>{game.gameDescription}</Card.Text>
+
+                {/* if user writes on a new line, it will reflect properly on the card */}
+                <Card.Text style={{ whiteSpace: "pre-line" }}>
+                    {game.gameDescription}
+                </Card.Text>
 
                 {/* edit game description button */}
                 <Button variant="secondary" href={`game/${game.id}`} className="ms-2">

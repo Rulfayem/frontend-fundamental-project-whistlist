@@ -14,10 +14,9 @@ export default function EditGameDesc() {
     const currentGame = wishedGame.find((game) => game.id === gameId);
 
     const [gameTitle, setGameTitle] = useState(currentGame?.gameTitle || "");
-    const [gameDescription, setGameDescription] = useState(currentGame?.description || "");
-    const [released, setReleased] = useState(currentGame?.released || false);
+    const [gameDescription, setGameDescription] = useState(currentGame?.gameDescription || "");
 
-    //incase game is not found
+    // incase game is not found
     if (!currentGame) {
         return (
             <Container className="my-3">
@@ -27,18 +26,18 @@ export default function EditGameDesc() {
         );
     }
 
-
     function updateGame(event) {
         event.preventDefault();
         const updatedGames = wishedGame.map((game) => {
             if (game.id === gameId) {
-                return { id: gameId, gameTitle, gameDescription, released };
+                return { ...game, gameTitle, gameDescription };
             }
             return game;
         });
         setWishedGame(updatedGames);
         navigate('/');
     }
+
     return (
         <Container>
             <h1 className="my-3">Edit Description</h1>
@@ -53,6 +52,7 @@ export default function EditGameDesc() {
                         required
                     />
                 </Form.Group>
+
                 <Form.Group className="mb-3" controlId="description">
                     <Form.Label>Description</Form.Label>
                     <Form.Control
@@ -64,14 +64,7 @@ export default function EditGameDesc() {
                         required
                     />
                 </Form.Group>
-                <Form.Check
-                    type="checkbox"
-                    id="released"
-                    label="Mark as released"
-                    checked={released}
-                    onChange={(e) => setReleased(e.target.checked)}
-                    className="mb-3"
-                />
+
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>

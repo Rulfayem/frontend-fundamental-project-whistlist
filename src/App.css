@@ -1,3 +1,4 @@
+/* styling for the little buttons in the cards */
 .btn-orange {
     background-color: #ff7a00;
     border-color: #ff7a00;
@@ -13,4 +14,47 @@
 .btn-orange:active {
     background-color: #cc6300;
     border-color: #cc6300;
+}
+
+/* super cool random card effect found on google, thank you lol */
+.card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* custom navbar styling things */
+.navbar-custom {
+    background-color: #1b2838;
+    padding: 10px;
+}
+
+.navbar-custom .navbar-brand {
+    color: #66c0f4 !important;
+    font-weight: bold;
+}
+
+.add-link {
+    color: white !important;
+}
+
+.add-link:hover {
+    color: #66c0f4 !important;
+}
+
+
+/* background and title stuff */
+body {
+
+    background: linear-gradient(180deg, #2d2f48 0%, #1b1f33 100%);
+
+    /* for the title thing */
+    color: #dbe3ec;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
 }

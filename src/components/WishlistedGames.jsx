@@ -1,10 +1,9 @@
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Row, Col } from "react-bootstrap";
 import { useContext } from "react";
 import { WishlistedContext } from "../contexts/WishlistedContext";
 
 export default function WishlistedGameDisplay({ game }) {
     const owned = game.owned;
-    const border = owned ? "success" : "danger";
     const { setWishedGame } = useContext(WishlistedContext);
 
     const deleteGame = () => {
@@ -24,36 +23,62 @@ export default function WishlistedGameDisplay({ game }) {
     };
 
     return (
-        <Card border={border} className="my-3">
-            <Card.Header>{owned ? "Owned✅" : "Not Owned❌"}</Card.Header>
-            <Card.Body>
-                <Card.Title>{game.gameTitle}</Card.Title>
+        <Card
+            className="my-3"
+            style={{
+                border: "none",
+                borderRadius: "12px",
+                overflow: "hidden",
+                boxShadow: "0 6px 18px rgba(0,0,0,0.25)",
+                backgroundColor: "#2f3348", // changed to a lighter grayish-blue
+            }}
+        >
+            {/* Header banner for Owned / Not Owned */}
+            <div
+                style={{
+                    backgroundColor: owned ? "#28a745" : "#dc3545",
+                    color: "white",
+                    padding: "6px 12px",
+                    fontWeight: "bold",
+                    textAlign: "center",
+                }}
+            >
+                {owned ? "Owned ✅" : "Not Owned ✖️"}
+            </div>
 
-                {/* if user writes on a new line, it will reflect properly on the card */}
-                <Card.Text style={{ whiteSpace: "pre-line" }}>
+            {/* Card body content */}
+            <Card.Body>
+                <Card.Title style={{ color: "#66c0f4" }}>{game.gameTitle}</Card.Title>
+                <Card.Text style={{ whiteSpace: "pre-wrap", color: "#dbe3ec" }}>
                     {game.gameDescription}
                 </Card.Text>
 
-                {/* edit game description button */}
-                <Button variant="secondary" href={`game/${game.id}`} className="ms-2">
-                    <i className="bi bi-pencil"></i>
-                </Button>
+                {/* Buttons at bottom */}
+                <Row className="mt-3">
+                    <Col xs="auto">
+                        <Button variant="secondary" href={`game/${game.id}`}>
+                            <i className="bi bi-pencil"></i>
+                        </Button>
+                    </Col>
 
-                {/* toggle button to display if user owns the game or not */}
-                {owned ? (
-                    <Button onClick={toggleOwned} className="ms-2 btn-orange">
-                        <i className="bi bi-x-lg"></i>
-                    </Button>
-                ) : (
-                    <Button variant="success" onClick={toggleOwned} className="ms-2">
-                        <i className="bi bi-check-lg"></i>
-                    </Button>
-                )}
+                    <Col xs="auto">
+                        {owned ? (
+                            <Button onClick={toggleOwned} className="btn-orange">
+                                <i className="bi bi-x-lg"></i>
+                            </Button>
+                        ) : (
+                            <Button variant="success" onClick={toggleOwned}>
+                                <i className="bi bi-check-lg"></i>
+                            </Button>
+                        )}
+                    </Col>
 
-                {/* deletes the card for the respective game button */}
-                <Button variant="danger" onClick={deleteGame} className="ms-2">
-                    <i className="bi bi-trash3"></i>
-                </Button>
+                    <Col xs="auto">
+                        <Button variant="danger" onClick={deleteGame}>
+                            <i className="bi bi-trash3"></i>
+                        </Button>
+                    </Col>
+                </Row>
             </Card.Body>
         </Card>
     );

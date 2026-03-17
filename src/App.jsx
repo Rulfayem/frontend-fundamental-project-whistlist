@@ -14,11 +14,16 @@ import "./App.css"
 function SiteLayout() {
   return (
     <>
-      <Navbar bg="light" variant="light">
+      <Navbar className="navbar-custom">
         <Container>
-          <Navbar.Brand as={Link} to="/">Wishlisted Games</Navbar.Brand>
-          <Nav>
-            <Nav.Link as={Link} to="/add-game-from-steam">Add Game</Nav.Link>
+          <Navbar.Brand as={Link} to="/">
+            Wishlist
+          </Navbar.Brand>
+
+          <Nav className="ms-auto">
+            <Nav.Link as={Link} to="/add-game-from-steam" className="add-link">
+              Add Game
+            </Nav.Link>
           </Nav>
         </Container>
       </Navbar>

@@ -9,7 +9,7 @@ export default function AddWishlistedGameManually() {
     const { wishedGame, setWishedGame } = useContext(WishlistedContext);
     const navigate = useNavigate();
 
-    const isFormValid = gameTitle.trim() !== "" && gameDescription.trim() !== "";
+    const isSubmitionValid = gameTitle.trim() !== "" && gameDescription.trim() !== "";
 
     return (
         <Container>
@@ -43,7 +43,7 @@ export default function AddWishlistedGameManually() {
                 <Form
                     onSubmit={(event) => {
                         event.preventDefault();
-                        if (!isFormValid) return;
+                        if (!isSubmitionValid) return;
                         setWishedGame([
                             ...wishedGame,
                             { id: Date.now(), gameTitle, gameDescription, owned: false },
@@ -95,17 +95,17 @@ export default function AddWishlistedGameManually() {
 
                     <Button
                         type="submit"
-                        disabled={!isFormValid}
+                        disabled={!isSubmitionValid}
                         className="w-100"
                         style={{
-                            background: isFormValid
+                            background: isSubmitionValid
                                 ? "linear-gradient(90deg, #4e91dd, #2f73af)"
                                 : "#4a4f63",
                             border: "none",
                             fontWeight: "bold",
                             padding: "10px",
                             color: "#dbe3ec",
-                            cursor: isFormValid ? "pointer" : "not-allowed",
+                            cursor: isSubmitionValid ? "pointer" : "not-allowed",
                             boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
                         }}
                     >

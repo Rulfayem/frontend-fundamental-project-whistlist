@@ -16,7 +16,7 @@ export default function EditGameDesc() {
     const [gameTitle, setGameTitle] = useState(currentGame?.gameTitle || "");
     const [gameDescription, setGameDescription] = useState(currentGame?.gameDescription || "");
 
-    // incase game is not found
+    //incase protocol game is not found for whatever reason
     if (!currentGame) {
         return (
             <Container className="my-3">
@@ -26,7 +26,7 @@ export default function EditGameDesc() {
         );
     }
 
-    function updateGame(event) {
+    function updateGameDesc(event) {
         event.preventDefault();
         const updatedGames = wishedGame.map((game) => {
             if (game.id === gameId) {
@@ -41,7 +41,7 @@ export default function EditGameDesc() {
     return (
         <Container>
             <h1 className="my-3">Edit Description</h1>
-            <Form onSubmit={updateGame}>
+            <Form onSubmit={updateGameDesc}>
                 <Form.Group className="mb-3" controlId="gameTitle">
                     <Form.Label>Game Title</Form.Label>
                     <Form.Control

@@ -11,7 +11,7 @@ import AddWishlistedGameManually from "./website_pages/AddWishlistedGameManually
 import AddWishlistedGameFromSteam from "./website_pages/AddWishlistedGameFromSteam"
 import "./App.css"
 
-function SiteLayout() {
+function NavbarLayout() {
   return (
     <>
       <Navbar className="navbar-custom">
@@ -39,7 +39,7 @@ export default function App() {
     <WishlistedContext.Provider value={{ wishedGame, setWishedGame }}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<SiteLayout />}>
+          <Route path="/" element={<NavbarLayout />}>
             <Route index element={<HomePage />} />
             <Route path="add-game-manually" element={<AddWishlistedGameManually />} />
             <Route path="add-game-from-steam" element={<AddWishlistedGameFromSteam />} />

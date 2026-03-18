@@ -16,7 +16,7 @@
     border-color: #cc6300;
 }
 
-/* super cool random card effect found on google, thank you lol */
+/* super cool random hover pop-out card effect found on google, thank you lol */
 .card {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -30,13 +30,6 @@
 .no-hover-card:hover {
     transform: none !important;
     box-shadow: none !important;
-}
-
-/* certain placeholder text want to be this specific colour */
-.cool-custom-card input::placeholder,
-.cool-custom-card textarea::placeholder {
-    color: #D3D3D3;
-    opacity: 1;
 }
 
 /* custom navbar styling things */
@@ -70,6 +63,13 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
+}
+
+/* certain placeholder text want to be this specific colour */
+.cool-custom-card input::placeholder,
+.cool-custom-card textarea::placeholder {
+    color: #D3D3D3;
+    opacity: 1;
 }
 
 /* only affects this specific placeholder text */

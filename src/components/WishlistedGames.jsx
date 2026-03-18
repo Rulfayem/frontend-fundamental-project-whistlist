@@ -6,12 +6,14 @@ export default function WishlistedGameDisplay({ game }) {
     const owned = game.owned;
     const { setWishedGame } = useContext(WishlistedContext);
 
+    //button logic to delete the respective card
     const deleteGame = () => {
         setWishedGame((prevGames) =>
             prevGames.filter((prevGame) => prevGame.id !== game.id)
         );
     };
 
+    //button logic to toggle the respective card whether user owns the game or not
     const toggleOwned = () => {
         setWishedGame((prevGames) =>
             prevGames.map((prevGame) =>
@@ -30,10 +32,10 @@ export default function WishlistedGameDisplay({ game }) {
                 borderRadius: "12px",
                 overflow: "hidden",
                 boxShadow: "0 6px 18px rgba(0,0,0,0.25)",
-                backgroundColor: "#2f3348", // changed to a lighter grayish-blue
+                backgroundColor: "#2f3348",
             }}
         >
-            {/* Header banner for Owned / Not Owned */}
+            {/* header banner to clearly show if card is Owned or Not Owned */}
             <div
                 style={{
                     backgroundColor: owned ? "#28a745" : "#dc3545",
@@ -46,14 +48,14 @@ export default function WishlistedGameDisplay({ game }) {
                 {owned ? "Owned ✅" : "Not Owned ✖️"}
             </div>
 
-            {/* Card body content */}
+            {/* the main meat content of the card */}
             <Card.Body>
                 <Card.Title style={{ color: "#66c0f4" }}>{game.gameTitle}</Card.Title>
                 <Card.Text style={{ whiteSpace: "pre-wrap", color: "#dbe3ec" }}>
                     {game.gameDescription}
                 </Card.Text>
 
-                {/* Buttons at bottom */}
+                {/* buttons at bottom of card*/}
                 <Row className="mt-3">
                     <Col xs="auto">
                         <Button variant="secondary" href={`game/${game.id}`}>

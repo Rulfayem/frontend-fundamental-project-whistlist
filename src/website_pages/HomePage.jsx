@@ -5,6 +5,7 @@ import { WishlistedContext } from "../contexts/WishlistedContext";
 
 export default function HomePage() {
     const { wishedGame } = useContext(WishlistedContext);
+
     return (
         <Container>
             <h1 className="my-3">Your wishlisted games:</h1>
@@ -14,7 +15,7 @@ export default function HomePage() {
                     <CardGroup wishedGame={wishedGame} />
                 </Row>
             ) : (
-                <p className="my-3 white">
+                <p className="my-3 text-white">
                     You haven’t wishlisted any games yet.
                 </p>
             )}
@@ -23,11 +24,13 @@ export default function HomePage() {
 }
 
 function CardGroup({ wishedGame }) {
-    return wishedGame.map((game) => {
-        return (
-            <Col md={4} key={game.id}>
-                <WishlistedGameDisplay game={game} />
-            </Col>
-        );
-    });
+    return (
+        <>
+            {wishedGame.map((game) => (
+                <Col md={4} key={game.id}>
+                    <WishlistedGameDisplay game={game} />
+                </Col>
+            ))}
+        </>
+    );
 }

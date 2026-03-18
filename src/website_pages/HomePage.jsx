@@ -14,7 +14,7 @@ export default function HomePage() {
                     <CardGroup wishedGame={wishedGame} />
                 </Row>
             ) : (
-                <p className="my-3 text-muted">
+                <p className="my-3 text-white">
                     You haven’t wishlisted any games yet.
                 </p>
             )}

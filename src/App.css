@@ -59,7 +59,8 @@ body {
 
     /* for the title thing */
     color: #dbe3ec;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    /* custom fonts, idk people recommended these in this order */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif, Arial;
     min-height: 100vh;
     margin: 0;
     padding: 0;

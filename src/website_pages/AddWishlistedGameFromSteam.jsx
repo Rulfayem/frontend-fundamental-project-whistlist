@@ -32,10 +32,12 @@ export default function AddWishlistedGameFromSteam() {
         }
     }
 
+    //the selected game that shows from search bar
     function gameChoiceSelection(game) {
         setSelectedGame(game);
     }
 
+    //few precautions when trying to submit a game
     function submitSelectedGame(e) {
         e.preventDefault();
         if (!selectedGame) return;

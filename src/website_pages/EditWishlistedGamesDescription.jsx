@@ -19,7 +19,7 @@ export default function EditGameDesc() {
     //incase protocol game is not found for whatever reason
     if (!currentGame) {
         return (
-            <Container className="my-3">
+            <Container className="my-3 white">
                 <h1>Game not found</h1>
                 <p>The requested game does not exist.</p>
             </Container>

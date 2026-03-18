@@ -67,7 +67,6 @@ export default function AddWishlistedGameManually() {
                             type="text"
                             placeholder="Hollow Knight: Silksong"
                             required
-                            // placeholder color only for this input
                             className="white-placeholder input-white"
                         />
                     </Form.Group>
